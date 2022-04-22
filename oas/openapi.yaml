@@ -1,0 +1,48 @@
+openapi: 3.0.2
+info:
+  title: FastAPI camera control
+  version: 0.0.1
+paths:
+  "/record_image":
+    post:
+      description: Record an image.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Media"
+
+  "/record_video":
+    post:
+      description: Start recording a video.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Media"
+    patch:
+      description: Stop recording a video.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Media"
+
+components:
+  schemas:
+    Media:
+      title: Media
+      type: object
+      properties:
+        filename:
+          title: Media filename
+          type: string
+          description: Media filename.
+      required:
+        - filename

@@ -1,0 +1,33 @@
+from __future__ import annotations
+from fastapi import FastAPI
+from .core import {% for operation in operations %} {{operation.function_name}}_core, {% endfor %}
+
+{{imports}}
+
+app = FastAPI(
+    {% if info %}
+    {% for key,value in info.items() %}
+    {{ key }} = "{{ value }}",
+    {% endfor %}
+    {% endif %}
+    openapi_url="/openapi.json"
+    )
+
+{% for operation in operations %}
+@app.{{operation.type}}('{{operation.snake_case_path}}', response_model={{operation.response}})
+def {{operation.function_name}}({{operation.snake_case_arguments}}
+    {%- if  operation.security %}, api_user: str = Depends(api_key)
+    {%- endif %}) -> {{operation.response}}:
+    {%- if operation.summary %}
+    """
+    {{ operation.summary }}
+    """
+    {%- endif %}
+    response = {{operation.function_name}}_core({{operation.request.name}})
+
+    {%- if operation.response %}
+    return response
+    {% else %}
+    pass
+    {%- endif %}
+{% endfor %}
