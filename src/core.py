@@ -7,7 +7,7 @@ import cv2
 from src.models import Media
 from src.video import VideoRecord, VideoStream
 
-CAMERA_DATA_PATH: str = "../data/" if os.getenv("CAMERA_DATA_PATH") is None else os.getenv("FASTAPI_DATA_PATH")
+CAMERA_DATA_PATH: str = "../data/" if os.getenv("CAMERA_DATA_PATH") is None else os.getenv("CAMERA_DATA_PATH")
 
 video_stream = VideoStream(0).start()
 video_record = VideoRecord(video_stream, video_stream.size)
