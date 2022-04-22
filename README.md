@@ -1,4 +1,7 @@
 # 
+```
+git st
+```
 
 ### RESTful App
 
@@ -24,21 +27,17 @@ poetry install
 poetry shell
 ```
 
-Of course, you can use the dockerized interpreter too. When using an 
-interpreter be careful to choose the top level directory as working directory.
-
-
 ### Run FastAPI
-
 
 ```
 PYTHONPATH="." python src/run.py
 ```
 
 ### Update FastAPI using OpenAPI
-When you want to update the API using the OpenAPI specification use this 
+When you want to generate the API using the OpenAPI specification use this 
 command:
 
 ```
 fastapi-codegen --input oas/openapi.yaml -t jinja --output src
 ```
+
