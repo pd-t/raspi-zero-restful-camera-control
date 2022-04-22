@@ -1,4 +1,6 @@
 from threading import Thread
+from time import sleep
+
 import cv2
 
 
@@ -37,15 +39,16 @@ class VideoRecord:
     Class that continuously record a frame using a dedicated thread.
     """
 
-    def __init__(self, stream, size):
+    def __init__(self, stream, size, fps: int = 24):
         self.stream = stream
         self.size = size
+        self.fps = fps
         self.recording = False
-        self.filename = None
+        self.filename = 'unknown'
         self.video_writer = None
 
     def start(self, filename: str):
-        if not self.recording:
+        if self.recording is False:
             self.recording = True
             self.filename = filename
             self.video_writer = cv2.VideoWriter(self.filename,
@@ -53,15 +56,18 @@ class VideoRecord:
                                                                        'J',
                                                                        'P',
                                                                        'G'),
-                                                10,
+                                                self.fps,
                                                 self.size)
             Thread(target=self.record, args=()).start()
         return self.filename
 
     def record(self):
         while self.recording:
+            sleep(1/self.fps)
             self.video_writer.write(self.stream.frame)
 
     def stop(self):
         self.recording = False
-        return self.filename
+        filename = self.filename
+        self.filename = 'unknown'
+        return filename

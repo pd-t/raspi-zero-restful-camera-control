@@ -28,8 +28,7 @@ def post_record_image_core():
 
 
 def post_record_video_core():
-    filename = get_filename(extension='.avi')
-    video_record.start(filename)
+    filename = video_record.start(get_filename(extension='.avi'))
     return Media(filename=filename)
 
 
