@@ -5,11 +5,6 @@ import cv2
 
 
 class VideoStream:
-    """
-    Class that continuously gets frames from a VideoCapture object
-    with a dedicated thread.
-    """
-
     def __init__(self, src=0):
         self.stream = cv2.VideoCapture(src)
         self.size = (
@@ -35,10 +30,6 @@ class VideoStream:
 
 
 class VideoRecord:
-    """
-    Class that continuously record a frame using a dedicated thread.
-    """
-
     def __init__(self, stream, size, fps: int = 24):
         self.stream = stream
         self.size = size
