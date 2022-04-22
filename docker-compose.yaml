@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  app:
+    build:
+      context: .
+      target: app
+    devices:
+      - "/dev/video0:/dev/video0"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data

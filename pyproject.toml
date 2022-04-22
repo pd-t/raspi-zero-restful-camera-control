@@ -13,6 +13,7 @@ python = "^3.8"
 fastapi = "^0.75.1"
 uvicorn = "^0.17.6"
 gunicorn = "^20.1.0"
+certifi = "^2021.10.8"
 
 [tool.poetry.dev-dependencies]
 opencv-python = "^4.5.1"
