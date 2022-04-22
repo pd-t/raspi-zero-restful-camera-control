@@ -3,7 +3,7 @@ import os
 import cv2
 from CountsPerSec import CountsPerSec
 from VideoGet import VideoGet
-from VideoShow import VideoShow
+from src.video import VideoShow
 
 def putIterationsPerSec(frame, iterations_per_sec):
     """
@@ -78,7 +78,7 @@ def threadBoth(source=0):
     """
 
     video_getter = VideoGet(source).start()
-    video_shower = VideoShow(video_getter.frame).start()
+    video_shower = VideoShow(video_getter).start()
     cps = CountsPerSec().start()
 
     while True:
