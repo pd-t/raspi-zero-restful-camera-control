@@ -21,11 +21,10 @@ sudo update-rc.d camera-control.sh defaults
 # remove downloaded sources
 rm -r raspi-zero-fastapi-camera-control
 
-# pip3 install poetry
-# poetry config virtualenvs.create false &&  poetry install --no-dev --no-interaction --no-ansi
-
+# install fastapi components
 pip3 install fastapi==0.75.1 gunicorn==20.1.0
 
+# make raspi camera availabe for cv2.VideoCapture
 modprobe bcm2835-v4l2
 
 shutdown -r now
