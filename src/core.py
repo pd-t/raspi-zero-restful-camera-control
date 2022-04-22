@@ -10,7 +10,7 @@ FASTAPI_DATA_PATH: str = "../data/" if os.getenv("FASTAPI_DATA_PATH") is None \
     else os.getenv("FASTAPI_DATA_PATH")
 
 video_stream = VideoStream(0).start()
-video_record = VideoRecord(video_stream.frame, video_stream.size)
+video_record = VideoRecord(video_stream, video_stream.size)
 
 
 def get_filename(extension: str):

@@ -37,8 +37,8 @@ class VideoRecord:
     Class that continuously record a frame using a dedicated thread.
     """
 
-    def __init__(self, frame, size):
-        self.frame = frame
+    def __init__(self, stream, size):
+        self.stream = stream
         self.size = size
         self.recording = False
         self.filename = None
@@ -60,7 +60,7 @@ class VideoRecord:
 
     def record(self):
         while self.recording:
-            self.video_writer.write(self.frame)
+            self.video_writer.write(self.stream.frame)
 
     def stop(self):
         self.recording = False
