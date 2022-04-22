@@ -1,10 +1,11 @@
-import cv2
-from pathlib import Path
-import os
 import datetime
+import os
+from pathlib import Path
+
+import cv2
 
 from src.models import Media
-from src.video import VideoStream, VideoRecord
+from src.video import VideoRecord, VideoStream
 
 FASTAPI_DATA_PATH: str = "../data/" if os.getenv("FASTAPI_DATA_PATH") is None else os.getenv("FASTAPI_DATA_PATH")
 
