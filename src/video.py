@@ -7,10 +7,7 @@ import cv2
 class VideoStream:
     def __init__(self, src=0):
         self.stream = cv2.VideoCapture(src)
-        self.size = (
-            int(self.stream.get(3)),
-            int(self.stream.get(4))
-        )
+        self.size = (int(self.stream.get(3)), int(self.stream.get(4)))
         (self.grabbed, self.frame) = self.stream.read()
         self.stopped = False
 
@@ -35,30 +32,26 @@ class VideoRecord:
         self.size = size
         self.fps = fps
         self.recording = False
-        self.filename = 'unknown'
+        self.filename = "unknown"
         self.video_writer = None
 
     def start(self, filename: str):
         if self.recording is False:
             self.recording = True
             self.filename = filename
-            self.video_writer = cv2.VideoWriter(self.filename,
-                                                cv2.VideoWriter_fourcc('M',
-                                                                       'J',
-                                                                       'P',
-                                                                       'G'),
-                                                self.fps,
-                                                self.size)
+            self.video_writer = cv2.VideoWriter(
+                self.filename, cv2.VideoWriter_fourcc("M", "J", "P", "G"), self.fps, self.size
+            )
             Thread(target=self.record, args=()).start()
         return self.filename
 
     def record(self):
         while self.recording:
-            sleep(1/self.fps)
+            sleep(1 / self.fps)
             self.video_writer.write(self.stream.frame)
 
     def stop(self):
         self.recording = False
         filename = self.filename
-        self.filename = 'unknown'
+        self.filename = "unknown"
         return filename

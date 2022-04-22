@@ -16,19 +16,19 @@ from .models import Media
 app = FastAPI(title="FastAPI camera control", version="0.0.1", openapi_url="/openapi.json")
 
 
-@app.post('/record_image', response_model=Media)
+@app.post("/record_image", response_model=Media)
 def post_record_image() -> Media:
     response = post_record_image_core()
     return response
 
 
-@app.post('/record_video', response_model=Media)
+@app.post("/record_video", response_model=Media)
 def post_record_video() -> Media:
     response = post_record_video_core()
     return response
 
 
-@app.patch('/record_video', response_model=Media)
+@app.patch("/record_video", response_model=Media)
 def patch_record_video() -> Media:
     response = patch_record_video_core()
     return response

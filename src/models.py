@@ -8,4 +8,4 @@ from pydantic import BaseModel, Field
 
 
 class Media(BaseModel):
-    filename: str = Field(..., description='Media filename.', title='Media filename')
+    filename: str = Field(..., description="Media filename.", title="Media filename")
