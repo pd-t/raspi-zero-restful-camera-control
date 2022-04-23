@@ -1,18 +1,20 @@
 #!/bin/sh
 
-# install packages
+# install necessary packages
 apt-get update \
     && apt-get install --no-install-recommends -y python3 python3-opencv pip \
     && apt-get autoclean
 
-# get sources
+# download git repo
 git clone https://github.com/pd-t/raspi-zero-fastapi-camera-control.git
 
-# install sources
+# install necessary sources and config files
 mkdir -p /opt/camera-control
-cp -r raspi-zero-fastapi-camera-control/  /opt/camera-control
+cp -r raspi-zero-fastapi-camera-control/src  /opt/camera-control
+cp raspi-zero-fastapi-camera-control/config.cfg   /opt/camera-control
+cp raspi-zero-fastapi-camera-control/gunicorn_conf.py   /opt/camera-control
 
-# create start-up script
+# register start-up script at init.d
 cp raspi-zero-fastapi-camera-control/init.sh /etc/init.d/camera-control.sh
 sudo chmod +x /etc/init.d/camera-control.sh
 sudo chown root:root /etc/init.d/camera-control.sh
