@@ -1,7 +1,11 @@
 # 
 ```
+curl -sSL https://raw.githubusercontent.com/pd-t/raspi-zero-fastapi-camera-control/main/install.sh | sudo sh
+```
+
+```
 curl -sSL https://raw.githubusercontent.
-com/pd-t/raspi-zero-fastapi-camera-control/main/install.sh | sudo sh
+com/pd-t/raspi-zero-fastapi-camera-control/main/hotspot/setup.sh | sudo sh
 ```
 
 ### RESTful App
