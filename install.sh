@@ -24,7 +24,6 @@ rm -r raspi-zero-fastapi-camera-control
 # install fastapi components
 pip3 install fastapi==0.75.1 gunicorn==20.1.0
 
-# make raspi camera availabe for cv2.VideoCapture
+# make raspi camera available for cv2.VideoCapture after reboot
 modprobe bcm2835-v4l2
-
-shutdown -r now
+reboot
