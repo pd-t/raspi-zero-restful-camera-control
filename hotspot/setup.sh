@@ -9,8 +9,6 @@ curl -sSL https://raw.githubusercontent.com/pd-t/raspi-zero-fastapi-camera-contr
 curl -sSL https://raw.githubusercontent.com/pd-t/raspi-zero-fastapi-camera-control/main/hotspot/hostapd.conf > /etc/hostapd/hostapd.conf
 
 rfkill unblock wlan
-
 systemctl unmask hostapd
 systemctl enable hostapd
-
 systemctl reboot
