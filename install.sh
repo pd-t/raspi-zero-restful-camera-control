@@ -2,7 +2,7 @@
 
 # install necessary packages
 apt-get update \
-    && apt-get install --no-install-recommends -y python3 python3-opencv pip \
+    && apt-get install --no-install-recommends -y python3 python3-opencv pip git \
     && apt-get autoclean
 
 # download git repo
