@@ -12,8 +12,8 @@
 
 case "$1" in
  start)
- CAMERA_DATA_PATH="/camera"
- mkdir -p $CAMERA_DATA_PATH
+ source config.cfg
+ mkdir -p "$CAMERA_DATA_PATH"
  WEB_CONCURRENCY=1 gunicorn --worker-class uvicorn.workers.UvicornWorker --config /opt/camera-control/gunicorn_conf.py --chdir /opt/camera-control src.main:app
  ;;
 esac
