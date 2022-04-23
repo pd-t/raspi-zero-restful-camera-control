@@ -12,7 +12,7 @@
 
 case "$1" in
  start)
- source /opt/camera-control/config.cfg
+ . /opt/camera-control/config.cfg
  mkdir -p "$CAMERA_DATA_PATH"
  WEB_CONCURRENCY=1 gunicorn --worker-class uvicorn.workers.UvicornWorker --config /opt/camera-control/gunicorn_conf.py --chdir /opt/camera-control src.main:app
  ;;
