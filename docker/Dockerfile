@@ -7,7 +7,7 @@ RUN apt-get update \
 FROM python-base as builder-base
 
 RUN pip3 install poetry==1.1.4
-COPY poetry.lock pyproject.toml ./
+COPY ./poetry.lock pyproject.toml ./
 RUN poetry config virtualenvs.create false &&  poetry install --no-dev --no-interaction --no-ansi
 
 
@@ -15,11 +15,11 @@ FROM builder-base AS app
 ENV PROJECT_DIR="/app"
 ENV WEB_CONCURRENCY=1
 
-COPY gunicorn_conf.py $PROJECT_DIR/
+COPY ./gunicorn_conf.py $PROJECT_DIR/
 
 WORKDIR $PROJECT_DIR
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 COPY src $PROJECT_DIR/src
