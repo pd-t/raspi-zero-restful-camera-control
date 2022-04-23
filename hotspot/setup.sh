@@ -11,4 +11,4 @@ curl -sSL https://raw.githubusercontent.com/pd-t/raspi-zero-fastapi-camera-contr
 rfkill unblock wlan
 systemctl unmask hostapd
 systemctl enable hostapd
-systemctl reboot
+reboot
