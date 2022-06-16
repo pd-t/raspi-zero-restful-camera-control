@@ -20,18 +20,18 @@ def get_filename(extension: str):
     return filename
 
 
-def post_record_image_core():
+def get_take_picture_core():
     img = video_stream.frame
     media = Media(filename=get_filename(extension=".jpg"))
     cv2.imwrite(media.filename, img)
     return media
 
 
-def post_record_video_core():
+def get_start_video_core():
     filename = video_record.start(get_filename(extension=".avi"))
     return Media(filename=filename)
 
 
-def patch_record_video_core():
+def get_stop_video_core():
     filename = video_record.stop()
     return Media(filename=filename)

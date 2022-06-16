@@ -3,8 +3,8 @@ info:
   title: FastAPI camera control
   version: 0.0.1
 paths:
-  "/record_image":
-    post:
+  "/take_picture":
+    get:
       description: Record an image.
       responses:
         '200':
@@ -13,9 +13,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Media"
-
-  "/record_video":
-    post:
+  "/start_video":
+    get:
       description: Start recording a video.
       responses:
         '200':
@@ -24,7 +23,8 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Media"
-    patch:
+  "/stop_video":
+    get:
       description: Stop recording a video.
       responses:
         '200':
