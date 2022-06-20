@@ -5,14 +5,17 @@ CSI to a Raspi Zero W using a REST service. The REST service can be
 accessed via a Wi-Fi hotspot.
 
 The following recording features are implemented:
-- Single Image 
+- Single Image
 - Video (start/stop)
 
 The project is based on the idea of an independent companion computer for 
 drones for imaging with special cameras (e.g. a [NOIR Pi Camera]
-[NOIRPiCamera]).
+[NOIRPiCamera]). For more information why we need this type of camera, see 
+[here][NDVI].
 
 [NOIRPiCamera]: https://www.raspberrypi.com/products/pi-noir-camera-v2/
+[NDVI]: https://www.raspberrypi.com/news/whats-that-blue-thing-doing-here/
+
 
 ## Installation
 Start from a fresh new Raspberry Pi OS Lite (the following steps where 
@@ -25,7 +28,8 @@ login using ssh (this can be prepared using the [imager][RaspberryPiImager]).
 
 Connect the Camera to your Raspberry and login via ssh to activate your Pi 
 Camera as described [here][PiCameraInstall]. Be aware that you need a 
-special CSI cable for the Pi Zero.
+special CSI cable for the Pi Zero. In case your images appear red, 
+append `awb_auto_is_greyworld=1` to the end of `/boot/config.txt`.
 
 [PiCameraInstall]: https://www.raspberrypi.com/documentation/accessories/camera.html
 
