@@ -29,7 +29,9 @@ login using ssh (this can be prepared using the [imager][RaspberryPiImager]).
 Connect the Camera to your Raspberry and login via ssh to activate your Pi 
 Camera as described [here][PiCameraInstall]. Be aware that you need a 
 special CSI cable for the Pi Zero. In case your images appear red, 
-append `awb_auto_is_greyworld=1` to the end of `/boot/config.txt`.
+append `awb_auto_is_greyworld=1` to the end of `/boot/config.txt`. In 
+addition to this you have to increase the gpu memory to 256MB for full 
+resolution images, see the performance options in `raspi-config`.
 
 [PiCameraInstall]: https://www.raspberrypi.com/documentation/accessories/camera.html
 
