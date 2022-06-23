@@ -1,59 +1,62 @@
-from threading import Thread
 from time import sleep
-
-import cv2
-
-
-class VideoStream:
-    def __init__(self, src=0):
-        self.stream = cv2.VideoCapture(src)
-        self.stream.set(3, 640)
-        self.stream.set(4, 480)
-        self.size = (int(self.stream.get(3)), int(self.stream.get(4)))
-        (self.grabbed, self.frame) = self.stream.read()
-        self.stopped = False
-
-    def start(self):
-        Thread(target=self.get, args=()).start()
-        return self
-
-    def get(self):
-        while not self.stopped:
-            if not self.grabbed:
-                self.stop()
-            else:
-                (self.grabbed, self.frame) = self.stream.read()
-
-    def stop(self):
-        self.stopped = True
+from picamera import PiCamera
 
 
-class VideoRecord:
-    def __init__(self, stream, size, fps: int = 24):
-        self.stream = stream
-        self.size = size
-        self.fps = fps
+class Camera:
+    def __init__(
+            self,
+            src=0,
+            picture_resolution=(3280, 2464),
+            picture_framerate=6,
+            video_resolution=(1280, 720),
+            video_framerate=30
+
+    ):
+        self.picture_settings = {
+            'resolution': picture_resolution,
+            'framerate': picture_framerate
+        }
+        self.video_settings = {
+            'resolution': video_resolution,
+            'framerate': video_framerate
+        }
+        self.camera = PiCamera(camera_num=src)
         self.recording = False
         self.filename = "unknown"
-        self.video_writer = None
 
-    def start(self, filename: str):
-        if self.recording is False:
+    def start_video(self, filename: str) -> str:
+        if not self.recording:
             self.recording = True
             self.filename = filename
-            self.video_writer = cv2.VideoWriter(
-                self.filename, cv2.VideoWriter_fourcc("M", "J", "P", "G"), self.fps, self.size
-            )
-            Thread(target=self.record, args=()).start()
+            self.warm_up(self.video_settings)
+            self.camera.start_recording(filename)
         return self.filename
 
-    def record(self):
-        while self.recording:
-            sleep(1 / self.fps)
-            self.video_writer.write(self.stream.frame)
-
-    def stop(self):
-        self.recording = False
-        filename = self.filename
-        self.filename = "unknown"
+    def take_picture(self, filename) -> str:
+        self.warm_up(self.picture_settings)
+        if not self.recording:
+            self.camera.capture(filename)
         return filename
+
+    def warm_up(self, settings):
+        self.camera.framerate = settings['framerate']
+        self.camera.resolution = settings['resolution']
+        self.camera.start_preview()
+        sleep(2)
+
+    def stop_video(self):
+        filename = self.filename
+        if self.recording:
+            self.camera.stop_recording()
+            self.recording = False
+            self.filename = "unknown"
+        return filename
+
+
+if __name__ == "__main__":
+    # This is a short integration test
+    camera = Camera()
+    camera.take_picture('my_picture.jpg')
+    camera.start_video('my_video.h264')
+    sleep(10)
+    camera.stop_video()

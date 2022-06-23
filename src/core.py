@@ -2,15 +2,12 @@ import datetime
 import os
 from pathlib import Path
 
-import cv2
-
 from src.models import Media
-from src.video import VideoRecord, VideoStream
+from src.video import Camera
 
 CAMERA_DATA_PATH: str = "../data/" if os.getenv("CAMERA_DATA_PATH") is None else os.getenv("CAMERA_DATA_PATH")
 
-video_stream = VideoStream(0).start()
-video_record = VideoRecord(video_stream, video_stream.size)
+camera = Camera()
 
 
 def get_filename(extension: str):
@@ -21,17 +18,16 @@ def get_filename(extension: str):
 
 
 def get_take_picture_core():
-    img = video_stream.frame
-    media = Media(filename=get_filename(extension=".jpg"))
-    cv2.imwrite(media.filename, img)
+    filename = camera.take_picture(get_filename(extension=".jpg"))
+    media = Media(filename=filename)
     return media
 
 
 def get_start_video_core():
-    filename = video_record.start(get_filename(extension=".avi"))
+    filename = camera.start_video(get_filename(extension=".h264"))
     return Media(filename=filename)
 
 
 def get_stop_video_core():
-    filename = video_record.stop()
+    filename = camera.stop_video()
     return Media(filename=filename)
