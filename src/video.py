@@ -6,8 +6,8 @@ class Camera:
     def __init__(
             self,
             src=0,
-            picture_resolution=(3280, 2464),
-            picture_framerate=6,
+            picture_resolution=(1280, 720),
+            picture_framerate=30,
             video_resolution=(1280, 720),
             video_framerate=30
 
